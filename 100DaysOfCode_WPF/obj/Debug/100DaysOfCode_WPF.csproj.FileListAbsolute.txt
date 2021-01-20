@@ -1,0 +1,14 @@
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\bin\Debug\100DaysOfCode_WPF.exe.config
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\bin\Debug\100DaysOfCode_WPF.exe
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\bin\Debug\100DaysOfCode_WPF.pdb
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.csprojResolveAssemblyReference.cache
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\frmProductos.g.cs
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\App.g.cs
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF_MarkupCompile.cache
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF_MarkupCompile.lref
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\frmProductos.baml
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.g.resources
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\_100DaysOfCode_WPF.Properties.Resources.resources
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.csproj.GenerateResource.Cache
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.exe
+C:\Users\JARGS\Documents\Visual Studio 2015\Projects\!00DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.pdb
