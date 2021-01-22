@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace _100DaysOfCode_WPF
 {
-    class productos
+    public class productos
     {
+        public int id { get; set; }
         public string codigo { get; set; }
         public string nombre { get; set; }
         public int cantidad { get; set; }

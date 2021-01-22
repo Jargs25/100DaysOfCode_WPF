@@ -29,6 +29,7 @@
         <GroupBox x:Name="gbxRegistros" Header="Registros" HorizontalAlignment="Left" Margin="315,10,0,0" VerticalAlignment="Top" Height="200" Width="317" TabIndex="2">
             <DataGrid x:Name="dgRegistros" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="284" Height="170" IsReadOnly="True" MouseLeftButtonDown="dgRegistros_MouseLeftButtonDown" TabIndex="1">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding id}" ClipboardContentBinding="{x:Null}" Header="Id" Width="100" Visibility="Hidden"/>
                     <DataGridTextColumn Binding="{Binding codigo}" ClipboardContentBinding="{x:Null}" Header="Código" Width="100"/>
                     <DataGridTextColumn Binding="{Binding nombre}" ClipboardContentBinding="{x:Null}" Header="Nombre" Width="120"/>
                     <DataGridTextColumn Binding="{Binding cantidad}" ClipboardContentBinding="{x:Null}" Header="Cantidad" Width="60"/>

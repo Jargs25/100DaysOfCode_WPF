@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace _100DaysOfCode_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<productos> lstProducto = new List<productos>();
+        model_productos mProducto = new model_productos();
         string rutaImagen = Directory.GetCurrentDirectory();
         string nuevaImagen = "NoDisponible";
 
@@ -33,15 +34,15 @@ namespace _100DaysOfCode_WPF
             if (!Directory.Exists(rutaImagen))
                 Directory.CreateDirectory(rutaImagen);
             dgRegistros.AutoGenerateColumns = false;
+            dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos()).DefaultView;
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             if (sonValidos())
             {
-                lstProducto.Add(new productos("000000", txtNombre.Text.Trim(), Convert.ToInt32(txtCantidad.Text.Trim()),Convert.ToDouble(txtPrecio.Text.Trim()), nuevaImagen ));
-                dgRegistros.ItemsSource = lstProducto;
-                dgRegistros.Items.Refresh();
+                mProducto.AgregarProducto(new productos("000000", txtNombre.Text.Trim(), Convert.ToInt32(txtCantidad.Text.Trim()),Convert.ToDouble(txtPrecio.Text.Trim()), nuevaImagen ));
+                dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos()).DefaultView;
 
                 if (nuevaImagen != "NoDisponible")
                     guardarImagen(nuevaImagen.Split('.')[1]);
@@ -58,16 +59,12 @@ namespace _100DaysOfCode_WPF
         {
             if (sonValidos())
             {
-                productos row = lstProducto[id];
+                productos oProducto = new productos(txtCodigo.Text.Trim(), txtNombre.Text.Trim(), Convert.ToInt32(txtCantidad.Text.Trim()), Convert.ToDouble(txtPrecio.Text.Trim()),nuevaImagen);
+                oProducto.id = id;
 
-                row.codigo = "00000";
-                row.nombre = txtNombre.Text.Trim();
-                row.cantidad = Convert.ToInt32(txtCantidad.Text.Trim());
-                row.precio = Convert.ToDouble(txtPrecio.Text.Trim());
-                row.rutaImagen = nuevaImagen;
+                mProducto.ModificarProducto(oProducto);
 
-                dgRegistros.ItemsSource = lstProducto;
-                dgRegistros.Items.Refresh();
+                dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos()).DefaultView;
 
                 if (nuevaImagen != "NoDisponible")
                     guardarImagen(nuevaImagen.Split('.')[1]);
@@ -83,10 +80,8 @@ namespace _100DaysOfCode_WPF
         {
             if(id > -1)
             {
-                lstProducto.RemoveAt(id);
-                dgRegistros.ItemsSource = lstProducto;
-                dgRegistros.Items.Refresh();
-                image.Source = null;
+                mProducto.EliminarProducto(id);
+                dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos()).DefaultView;
 
                 if (nuevaImagen != "NoDisponible")
                     File.Delete(nuevaImagen);
@@ -97,39 +92,28 @@ namespace _100DaysOfCode_WPF
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
             if(btnBuscar.Content.ToString() == "Buscar")
-                {
-                List<productos> filtro = new List<productos>();
-
-                for (int i = 0; i < lstProducto.Count; i++)
-                {
-                    productos p = lstProducto[i];
-
-                    if (p.codigo.Contains(txtCodigo.Text.Trim()) && p.nombre.Contains(txtNombre.Text.Trim()) &&
-                        p.cantidad.ToString().Contains(txtCantidad.Text.Trim()) && p.precio.ToString().Contains(txtPrecio.Text.Trim()))
-                        filtro.Add(p);
-                }
-                dgRegistros.ItemsSource = filtro;
+            {
+                dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos(txtCodigo.Text.Trim(),txtNombre.Text.Trim(), Convert.ToInt32(txtCantidad.Text.Trim() == "" ? "0" : txtCantidad.Text.Trim()),Convert.ToDouble(txtPrecio.Text.Trim() == "" ? "0": txtPrecio.Text.Trim()),"")).DefaultView;
             }
             else
             {
-                dgRegistros.ItemsSource = lstProducto;
+                dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos()).DefaultView;
                 limpiarForm();
             }
-
-            dgRegistros.Items.Refresh();
         }
 
         int id = -1;
         private void dgRegistros_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            id = dgRegistros.SelectedIndex;
 
-            productos row = (productos)dgRegistros.Items[id];
-            txtCodigo.Text = row.codigo;
-            txtNombre.Text = row.nombre;
-            txtCantidad.Text = row.cantidad.ToString();
-            txtPrecio.Text = row.precio.ToString();
-            nuevaImagen = row.rutaImagen;
+            DataRowView row = (DataRowView)dgRegistros.Items[dgRegistros.SelectedIndex];
+
+            id = Convert.ToInt32(row["id"]);
+            txtCodigo.Text = row["codigo"].ToString();
+            txtNombre.Text = row["nombre"].ToString();
+            txtCantidad.Text = row["cantidad"].ToString();
+            txtPrecio.Text = row["precio"].ToString();
+            nuevaImagen = row["rutaImagen"].ToString();
             if (nuevaImagen != "NoDisponible")
             {
                 image.Source = getImagenUri(nuevaImagen);
