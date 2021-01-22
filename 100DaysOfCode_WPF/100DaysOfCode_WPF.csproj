@@ -68,8 +68,15 @@
       <DependentUpon>frmProductos.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Mensaje.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mensaje.xaml.cs">
+      <DependentUpon>Mensaje.xaml</DependentUpon>
+    </Compile>
     <Compile Include="model_productos.cs" />
     <Compile Include="productos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

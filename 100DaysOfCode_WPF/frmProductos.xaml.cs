@@ -51,7 +51,7 @@ namespace _100DaysOfCode_WPF
             }
             else
             {
-                MessageBox.Show("Verifique los campos");
+                Mensaje.Show("Verifique los campos", 0, 0);
             }
 
         }
@@ -73,7 +73,7 @@ namespace _100DaysOfCode_WPF
             }
             else
             {
-                MessageBox.Show("Verifique los campos");
+                Mensaje.Show("Verifique los campos", 0, 0);
             }
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -105,7 +105,6 @@ namespace _100DaysOfCode_WPF
         int id = -1;
         private void dgRegistros_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
             DataRowView row = (DataRowView)dgRegistros.Items[dgRegistros.SelectedIndex];
 
             id = Convert.ToInt32(row["id"]);
@@ -116,7 +115,7 @@ namespace _100DaysOfCode_WPF
             nuevaImagen = row["rutaImagen"].ToString();
             if (nuevaImagen != "NoDisponible")
             {
-                image.Source = getImagenUri(nuevaImagen);
+                image.Source = getImagenUri();
                 lblNoDisponible.Visibility = Visibility.Hidden;
             }
             else
@@ -189,7 +188,7 @@ namespace _100DaysOfCode_WPF
             }
            fstream.Close();
         }
-        public BitmapImage getImagenUri(string url)
+        public BitmapImage getImagenUri()
         {
             BitmapImage bi = new BitmapImage();
 
@@ -203,8 +202,8 @@ namespace _100DaysOfCode_WPF
 
         private void frmProductos_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Esta por abandonar el programa ¿Desea continuar?","Mensaje del sistema",MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.No)
+            MessageBoxResult result = Mensaje.Show("Esta por abandonar el programa ¿Desea continuar?",1,1);
+            if (result == MessageBoxResult.No || result == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
             }
