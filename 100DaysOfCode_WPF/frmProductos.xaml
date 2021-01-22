@@ -5,29 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_100DaysOfCode_WPF"
         mc:Ignorable="d"
-        Title="CRUD Productos" Height="250" Width="650" WindowStartupLocation="CenterScreen" Closing="frmProductos_Closing">
+        Title="CRUD Productos" Height="250" Width="650" WindowStartupLocation="CenterScreen" Closing="frmProductos_Closing" ResizeMode="NoResize">
     <Grid>
-        <GroupBox x:Name="groupBox" Header="Datos" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="200" Width="300" TabIndex="1">
-            <Grid x:Name="gbxDatos" HorizontalAlignment="Left" Height="171" Margin="0,0,-2,0" VerticalAlignment="Top" Width="290">
-                <Label x:Name="lblCodigo" Content="Código:" HorizontalAlignment="Left" Margin="126,4,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="lblNombre" Content="Nombre:" HorizontalAlignment="Left" Margin="126,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,2.077"/>
-                <Label x:Name="kbkCantidad" Content="Cantidad:" HorizontalAlignment="Left" Margin="126,57,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,2.077"/>
-                <Label x:Name="lblPrecio" Content="Precio:" HorizontalAlignment="Left" Margin="126,85,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,2.077"/>
-                <TextBox x:Name="txtCodigo" HorizontalAlignment="Left" Height="23" Margin="195,6,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" TabIndex="1"/>
-                <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="195,33,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" TabIndex="2"/>
-                <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="195,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" TabIndex="3"/>
-                <TextBox x:Name="txtPrecio" HorizontalAlignment="Left" Height="23" Margin="195,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" TabIndex="4"/>
-                <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="126,118,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregar_Click" TabIndex="6"/>
-                <Button x:Name="btnModiicar" Content="Modificar" HorizontalAlignment="Left" Margin="205,118,0,0" VerticalAlignment="Top" Width="75" Click="btnModiicar_Click" TabIndex="7" IsEnabled="False"/>
-                <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="126,143,0,0" VerticalAlignment="Top" Width="75" Click="btnEliminar_Click" TabIndex="8" IsEnabled="False"/>
-                <Button x:Name="btnBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="206,143,0,0" VerticalAlignment="Top" Width="75" Click="btnBuscar_Click" TabIndex="9"/>
-                <Button x:Name="btnSubirImagen" Content="Subir imagen" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="100" Click="btnSubirImagen_Click" TabIndex="5"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFABFBA7" Offset="0"/>
+                <GradientStop Color="#FFD6FBD4" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <GroupBox x:Name="gbxDatos" Header="Datos" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="200" Width="300" TabIndex="1" FontSize="14" FontWeight="Bold" BorderBrush="#FF006409">
+            <Grid x:Name="grid" HorizontalAlignment="Left" Height="171" Margin="0,0,-2,0" VerticalAlignment="Top" Width="290">
+                <Label x:Name="lblCodigo" Content="Código:" HorizontalAlignment="Left" Margin="126,4,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="12"/>
+                <Label x:Name="lblNombre" Content="Nombre:" HorizontalAlignment="Left" Margin="126,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,2.077" FontWeight="Normal" FontSize="12"/>
+                <Label x:Name="kbkCantidad" Content="Cantidad:" HorizontalAlignment="Left" Margin="126,57,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,2.077" FontWeight="Normal" FontSize="12"/>
+                <Label x:Name="lblPrecio" Content="Precio:" HorizontalAlignment="Left" Margin="126,85,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,2.077" FontWeight="Normal" FontSize="12"/>
+                <TextBox x:Name="txtCodigo" HorizontalAlignment="Left" Height="23" Margin="195,6,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" TabIndex="1" FontWeight="Normal" FontSize="12"/>
+                <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="195,33,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" TabIndex="2" FontWeight="Normal" FontSize="12"/>
+                <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="195,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" TabIndex="3" FontWeight="Normal" FontSize="12"/>
+                <TextBox x:Name="txtPrecio" HorizontalAlignment="Left" Height="23" Margin="195,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" TabIndex="4" FontWeight="Normal" FontSize="12"/>
+                <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="126,118,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregar_Click" TabIndex="6" FontWeight="Normal" FontSize="12" Background="#FFBBFFB7" BorderBrush="#FF095F00"/>
+                <Button x:Name="btnModiicar" Content="Modificar" HorizontalAlignment="Left" Margin="205,118,0,0" VerticalAlignment="Top" Width="75" Click="btnModiicar_Click" TabIndex="7" IsEnabled="False" FontWeight="Normal" FontSize="12" Background="#FFBBFFB7" BorderBrush="#FF095F00"/>
+                <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="126,143,0,0" VerticalAlignment="Top" Width="75" Click="btnEliminar_Click" TabIndex="8" IsEnabled="False" FontWeight="Normal" FontSize="12" Background="#FFBBFFB7" BorderBrush="#FF095F00"/>
+                <Button x:Name="btnBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="206,143,0,0" VerticalAlignment="Top" Width="75" Click="btnBuscar_Click" TabIndex="9" FontWeight="Normal" FontSize="12" Background="#FFBBFFB7" BorderBrush="#FF095F00"/>
+                <Button x:Name="btnSubirImagen" Content="Subir imagen" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="100" Click="btnSubirImagen_Click" TabIndex="5" FontWeight="Normal" FontSize="12" Background="#FFBBFFB7" BorderBrush="#FF095F00"/>
                 <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100"/>
                 <Label x:Name="lblNoDisponible" Content="No Disponible" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,2.077" FontWeight="Bold" Visibility="Hidden"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="gbxRegistros" Header="Registros" HorizontalAlignment="Left" Margin="315,10,0,0" VerticalAlignment="Top" Height="200" Width="317" TabIndex="2">
-            <DataGrid x:Name="dgRegistros" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="284" Height="170" IsReadOnly="True" MouseLeftButtonDown="dgRegistros_MouseLeftButtonDown" TabIndex="1">
+        <GroupBox x:Name="gbxRegistros" Header="Registros" HorizontalAlignment="Left" Margin="315,10,0,0" VerticalAlignment="Top" Height="200" Width="317" TabIndex="2" FontSize="14" FontWeight="Bold" BorderBrush="#FF006409">
+            <DataGrid x:Name="dgRegistros" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="284" Height="170" IsReadOnly="True" MouseLeftButtonDown="dgRegistros_MouseLeftButtonDown" TabIndex="1" FontSize="12" FontWeight="Normal" Background="White">
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF65CD65"></SolidColorBrush>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding id}" ClipboardContentBinding="{x:Null}" Header="Id" Width="100" Visibility="Hidden"/>
                     <DataGridTextColumn Binding="{Binding codigo}" ClipboardContentBinding="{x:Null}" Header="Código" Width="100"/>

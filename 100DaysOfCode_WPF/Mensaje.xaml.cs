@@ -27,15 +27,6 @@ namespace _100DaysOfCode_WPF
             InitializeComponent();
         }
 
-        public static void Show()
-        {
-            oMensaje = new Mensaje();
-            if (Convert.ToBoolean(oMensaje.ShowDialog()))
-            {
-                MessageBoxResult mBoxr = Mensaje.mbr;
-            }
-
-        }
         public static MessageBoxResult Show(string texto)
         {
             oMensaje = new Mensaje();
@@ -43,6 +34,7 @@ namespace _100DaysOfCode_WPF
             oMensaje.lblMensaje.Width = 450;
             oMensaje.lblMensaje.Margin = new Thickness(20, 25, 20, 0);
             oMensaje.imagen.Visibility = Visibility.Hidden;
+            oMensaje.btnAceptar.IsDefault = true;
             oMensaje.ShowDialog();
 
             return mbr;
@@ -52,20 +44,24 @@ namespace _100DaysOfCode_WPF
             oMensaje = new Mensaje();
             oMensaje.tbkMensaje.Text = texto;
             oMensaje.lblMensaje.Width = 450;
-            oMensaje.lblMensaje.Margin = new Thickness(20, 25, 20, 0);
+            oMensaje.lblMensaje.Margin = new Thickness(20, 30, 20, 0);
             oMensaje.imagen.Visibility = Visibility.Hidden;
 
             switch (opcion)
             {
                 case 1:
-                    oMensaje.btnAceptar.Margin = new Thickness(165, 135, 0, 0);
+                    oMensaje.btnAceptar.Margin = new Thickness(165, 125, 0, 0);
                     oMensaje.btnAceptar.Content = "SI";
-                    oMensaje.btnNo.Margin = new Thickness(253, 135, 0, 0);
+                    oMensaje.btnNo.Margin = new Thickness(253, 125, 0, 0);
                     oMensaje.btnNo.Visibility = Visibility.Visible;
+                    oMensaje.btnAceptar.IsDefault = false;
+                    oMensaje.btnNo.IsDefault = true;
+                    oMensaje.btnNo.Focus();
                     break;
                 default:
-                    oMensaje.btnAceptar.Margin = new Thickness(208, 135, 0, 0);
+                    oMensaje.btnAceptar.Margin = new Thickness(208, 125, 0, 0);
                     oMensaje.btnNo.Visibility = Visibility.Hidden;
+                    oMensaje.btnAceptar.IsDefault = true;
                     break;
             }
             oMensaje.ShowDialog();
@@ -81,14 +77,18 @@ namespace _100DaysOfCode_WPF
             switch (opcion)
             {
                 case 1:
-                    oMensaje.btnAceptar.Margin = new Thickness(165, 135, 0, 0);
+                    oMensaje.btnAceptar.Margin = new Thickness(165, 125, 0, 0);
                     oMensaje.btnAceptar.Content = "SI";
-                    oMensaje.btnNo.Margin = new Thickness(253, 135, 0, 0);
+                    oMensaje.btnNo.Margin = new Thickness(253, 125, 0, 0);
                     oMensaje.btnNo.Visibility = Visibility.Visible;
+                    oMensaje.btnAceptar.IsDefault = false;
+                    oMensaje.btnNo.IsDefault = true;
+                    oMensaje.btnNo.Focus();
                     break;
                 default:
-                    oMensaje.btnAceptar.Margin = new Thickness(208, 135, 0, 0);
+                    oMensaje.btnAceptar.Margin = new Thickness(208, 125, 0, 0);
                     oMensaje.btnNo.Visibility = Visibility.Hidden;
+                    oMensaje.btnAceptar.IsDefault = true;
                     break;
             }
             switch (icono)
