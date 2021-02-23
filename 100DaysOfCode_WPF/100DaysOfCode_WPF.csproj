@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +57,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Service References\WCFProductos\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Page Include="frmProductos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,7 +70,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="conexion.cs" />
     <Compile Include="frmProductos.xaml.cs">
       <DependentUpon>frmProductos.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -77,8 +83,6 @@
     <Compile Include="Mensaje.xaml.cs">
       <DependentUpon>Mensaje.xaml</DependentUpon>
     </Compile>
-    <Compile Include="model_productos.cs" />
-    <Compile Include="productos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -101,9 +105,43 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\WCFProductos\WCFProducto.wsdl" />
+    <None Include="Service References\WCFProductos\WCFProducto.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WCFProductos\WCFProducto1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WCFProductos\WCFProducto2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WCFProductos\_100DaysOfCode_WPF.WCFProductos.Producto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\WCFProductos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WCFProductos\WCFProducto.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WCFProductos\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WCFProductos\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WCFProductos\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

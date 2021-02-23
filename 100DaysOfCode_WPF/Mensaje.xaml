@@ -9,15 +9,15 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFABFBA7" Offset="0"/>
-                <GradientStop Color="#FFD6FBD4" Offset="1"/>
+                <GradientStop Color="#FFD6FBD4" Offset="0"/>
+                <GradientStop Color="#FFE8FFE7" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Label x:Name="lblMensaje" Margin="136,30,26,0" VerticalAlignment="Top" Height="90" Width="330" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <TextBlock x:Name="tbkMensaje" TextWrapping="Wrap" Text="TextBlock" FontSize="14"/>
         </Label>
-        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="208,135,0,0" VerticalAlignment="Top" Width="74" IsDefault="True" RenderTransformOrigin="0.56,-1.6" Click="btnAceptar_Click" HorizontalContentAlignment="Center" Background="#FFBBFFB7" BorderBrush="#FF095F00"/>
-        <Button x:Name="btnNo" Content="NO" HorizontalAlignment="Left" Margin="253,158,0,0" VerticalAlignment="Top" Width="74" Visibility="Hidden" Click="btnNo_Click" Background="#FFBBFFB7" BorderBrush="#FF095F00"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="208,135,0,0" VerticalAlignment="Top" Width="74" IsDefault="True" RenderTransformOrigin="0.56,-1.6" Click="btnAceptar_Click" HorizontalContentAlignment="Center" Background="#FFCBFFC8" BorderBrush="#FF095F00"/>
+        <Button x:Name="btnNo" Content="NO" HorizontalAlignment="Left" Margin="253,158,0,0" VerticalAlignment="Top" Width="74" Visibility="Hidden" Click="btnNo_Click" Background="#FFCBFFC8" BorderBrush="#FF095F00"/>
         <Image x:Name="imagen" HorizontalAlignment="Left" Height="100" Margin="24,25,0,0" VerticalAlignment="Top" Width="100"/>
 
     </Grid>

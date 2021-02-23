@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using _100DaysOfCode_WPF.WCFProductos;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,29 +24,30 @@ namespace _100DaysOfCode_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        model_productos mProducto = new model_productos();
-        string rutaImagen = Directory.GetCurrentDirectory();
+        WCFProductoClient svcProducto = new WCFProductoClient();
+        Producto[] aryProductos;
         string nuevaImagen = "NoDisponible";
 
         public MainWindow()
         {
             InitializeComponent();
-            rutaImagen = rutaImagen.Replace("bin\\Debug","Productos\\");
-            if (!Directory.Exists(rutaImagen))
-                Directory.CreateDirectory(rutaImagen);
+
             dgRegistros.AutoGenerateColumns = false;
-            dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos()).DefaultView;
+            aryProductos = svcProducto.BuscarProductos(GetProducto());
+            dgRegistros.ItemsSource = aryProductos;
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             if (sonValidos())
             {
-                mProducto.AgregarProducto(new productos("000000", txtNombre.Text.Trim(), Convert.ToInt32(txtCantidad.Text.Trim()),Convert.ToDouble(txtPrecio.Text.Trim()), nuevaImagen ));
-                dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos()).DefaultView;
+                Producto oProducto = GetProducto(txtNombre.Text.Trim(), Convert.ToInt32(txtCantidad.Text.Trim()), Convert.ToDouble(txtPrecio.Text.Trim()));
+                oProducto.rutaImagen = nuevaImagen;
 
                 if (nuevaImagen != "NoDisponible")
-                    guardarImagen(nuevaImagen.Split('.')[1]);
+                    oProducto.imagen = GetByteArrayImage(image.Source, nuevaImagen.Split('.')[1]);
+
+                Mensaje.Show(svcProducto.AgregarProducto(oProducto));
 
                 limpiarForm();
             }
@@ -53,21 +55,19 @@ namespace _100DaysOfCode_WPF
             {
                 Mensaje.Show("Verifique los campos", 0, 0);
             }
-
         }
         private void btnModiicar_Click(object sender, RoutedEventArgs e)
         {
             if (sonValidos())
             {
-                productos oProducto = new productos(txtCodigo.Text.Trim(), txtNombre.Text.Trim(), Convert.ToInt32(txtCantidad.Text.Trim()), Convert.ToDouble(txtPrecio.Text.Trim()),nuevaImagen);
+                Producto oProducto = GetProducto(txtNombre.Text.Trim(), Convert.ToInt32(txtCantidad.Text.Trim()), Convert.ToDouble(txtPrecio.Text.Trim()));
+                oProducto.rutaImagen = nuevaImagen;
                 oProducto.id = id;
 
-                mProducto.ModificarProducto(oProducto);
-
-                dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos()).DefaultView;
-
                 if (nuevaImagen != "NoDisponible")
-                    guardarImagen(nuevaImagen.Split('.')[1]);
+                    oProducto.imagen = GetByteArrayImage(image.Source, nuevaImagen.Split('.')[1]);
+
+                Mensaje.Show(svcProducto.ModificarProducto(oProducto));
 
                 limpiarForm();
             }
@@ -78,64 +78,40 @@ namespace _100DaysOfCode_WPF
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            if(id > -1)
+            MessageBoxResult result = Mensaje.Show("Esta por eliminar el registro ¿Desea continuar?", 1, 1);
+            if (result == MessageBoxResult.Yes)
             {
-                mProducto.EliminarProducto(id);
-                dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos()).DefaultView;
+                Producto oProducto = GetProducto();
+                oProducto.id = id;
+                oProducto.rutaImagen = nuevaImagen;
 
-                if (nuevaImagen != "NoDisponible")
-                    File.Delete(nuevaImagen);
+                Mensaje.Show(svcProducto.EliminarProducto(oProducto));
 
                 limpiarForm();
             }
         }
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            if(btnBuscar.Content.ToString() == "Buscar")
+            if (btnBuscar.Content.ToString() == "Buscar")
             {
-                dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos(txtCodigo.Text.Trim(),txtNombre.Text.Trim(), Convert.ToInt32(txtCantidad.Text.Trim() == "" ? "0" : txtCantidad.Text.Trim()),Convert.ToDouble(txtPrecio.Text.Trim() == "" ? "0": txtPrecio.Text.Trim()),"")).DefaultView;
+                Producto oProducto = GetProducto(txtNombre.Text.Trim(), Convert.ToInt32(txtCantidad.Text.Trim() == "" ? "0" : txtCantidad.Text.Trim()), Convert.ToDouble(txtPrecio.Text.Trim() == "" ? "0" : txtPrecio.Text.Trim()));
+                oProducto.codigo = txtCodigo.Text.Trim();
+
+                aryProductos = svcProducto.BuscarProductos(oProducto);
+                dgRegistros.ItemsSource = aryProductos;
             }
             else
             {
-                dgRegistros.ItemsSource = mProducto.BuscarProductos(new productos()).DefaultView;
                 limpiarForm();
             }
         }
-
-        int id = -1;
-        private void dgRegistros_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DataRowView row = (DataRowView)dgRegistros.Items[dgRegistros.SelectedIndex];
-
-            id = Convert.ToInt32(row["id"]);
-            txtCodigo.Text = row["codigo"].ToString();
-            txtNombre.Text = row["nombre"].ToString();
-            txtCantidad.Text = row["cantidad"].ToString();
-            txtPrecio.Text = row["precio"].ToString();
-            nuevaImagen = row["rutaImagen"].ToString();
-            if (nuevaImagen != "NoDisponible")
-            {
-                image.Source = getImagenUri();
-                lblNoDisponible.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                lblNoDisponible.Visibility = Visibility.Visible;
-                image.Source = null;
-            }
-            btnAgregar.IsEnabled = false;
-            btnModiicar.IsEnabled = true;
-            btnEliminar.IsEnabled = true;
-            btnBuscar.Content = "Limpiar";
-        }
-
         private void btnSubirImagen_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofdImagen = new OpenFileDialog();
 
             if (Convert.ToBoolean(ofdImagen.ShowDialog()))
             {
-                nuevaImagen = rutaImagen + ofdImagen.SafeFileName;
+                nuevaImagen = ofdImagen.SafeFileName;
                 image.Source = new BitmapImage(new Uri(ofdImagen.FileName));
                 lblNoDisponible.Visibility = Visibility.Hidden;
             }
@@ -147,6 +123,47 @@ namespace _100DaysOfCode_WPF
             }
         }
 
+        int id = -1;
+        private void dgRegistros_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (dgRegistros.SelectedIndex > -1)
+            {
+                Producto selected = aryProductos[dgRegistros.SelectedIndex];
+
+                id = selected.id;
+                txtCodigo.Text = selected.codigo;
+                txtNombre.Text = selected.nombre;
+                txtCantidad.Text = selected.cantidad.ToString();
+                txtPrecio.Text = selected.precio.ToString();
+                nuevaImagen = selected.rutaImagen;
+
+                if (nuevaImagen != "NoDisponible")
+                {
+                    image.Source = GetImagenStream(selected.imagen);
+                    lblNoDisponible.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    lblNoDisponible.Visibility = Visibility.Visible;
+                    image.Source = null;
+                }
+
+                btnAgregar.IsEnabled = false;
+                btnModiicar.IsEnabled = true;
+                btnEliminar.IsEnabled = true;
+                btnBuscar.Content = "Limpiar";
+            }
+        }
+
+        private void frmProductos_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = Mensaje.Show("Esta por abandonar el programa ¿Desea continuar?",1,1);
+            if (result == MessageBoxResult.No || result == MessageBoxResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+        }
+
         public bool sonValidos()
         {
             if (txtNombre.Text.Trim() != "" && txtCantidad.Text.Trim() != "" && txtPrecio.Text.Trim() != "")
@@ -155,6 +172,9 @@ namespace _100DaysOfCode_WPF
         }
         public void limpiarForm()
         {
+            aryProductos = svcProducto.BuscarProductos(GetProducto());
+            dgRegistros.ItemsSource = aryProductos;
+            id = -1;
             txtCodigo.Clear();
             txtNombre.Clear();
             txtCantidad.Clear();
@@ -165,49 +185,65 @@ namespace _100DaysOfCode_WPF
             btnBuscar.Content = "Buscar";
             image.Source = null;
             nuevaImagen = "NoDisponible";
-            id = -1;
             lblNoDisponible.Visibility = Visibility.Hidden;
         }
-        public void guardarImagen(string extension)
+        public BitmapImage GetImagenStream(byte[] image)
         {
-            FileStream fstream;
-
-            if (extension == "jpg")
-            {
-                JpegBitmapEncoder jbe = new JpegBitmapEncoder();
-                jbe.Frames.Add(BitmapFrame.Create((BitmapSource)image.Source));
-                fstream = new FileStream(nuevaImagen, FileMode.Create);
-                jbe.Save(fstream);
-            }
-            else
-            {
-                PngBitmapEncoder pbe = new PngBitmapEncoder();
-                pbe.Frames.Add(BitmapFrame.Create((BitmapSource)image.Source));
-                fstream = new FileStream(nuevaImagen, FileMode.Create);
-                pbe.Save(fstream);
-            }
-           fstream.Close();
-        }
-        public BitmapImage getImagenUri()
-        {
+            MemoryStream ms = new MemoryStream(image);
             BitmapImage bi = new BitmapImage();
 
             bi.BeginInit();
             bi.CacheOption = BitmapCacheOption.OnLoad;
-            bi.UriSource = new Uri(nuevaImagen);
+            bi.StreamSource = ms;
             bi.EndInit();
 
             return bi;
         }
-
-        private void frmProductos_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private byte[] GetByteArrayImage(ImageSource imgSource, string extension)
         {
-            MessageBoxResult result = Mensaje.Show("Esta por abandonar el programa ¿Desea continuar?",1,1);
-            if (result == MessageBoxResult.No || result == MessageBoxResult.Cancel)
+            MemoryStream ms = new MemoryStream();
+
+            if (extension == "jpg")
             {
-                e.Cancel = true;
+                JpegBitmapEncoder jbe = new JpegBitmapEncoder();
+                jbe.Frames.Add(BitmapFrame.Create((BitmapSource)imgSource));
+                jbe.Save(ms);
+            }
+            else
+            {
+                PngBitmapEncoder pbe = new PngBitmapEncoder();
+                pbe.Frames.Add(BitmapFrame.Create((BitmapSource)imgSource));
+                pbe.Save(ms);
             }
 
+            return ms.ToArray();
+        }
+
+        private Producto GetProducto()
+        {
+            Producto oProducto = new Producto();
+
+            oProducto.id = 0;
+            oProducto.codigo = "";
+            oProducto.nombre = "";
+            oProducto.cantidad = 0;
+            oProducto.precio = 0;
+            oProducto.rutaImagen = "NoDisponible";
+
+            return oProducto;
+        }
+        private Producto GetProducto(string nombre, int cantidad, double precio)
+        {
+            Producto oProducto = new Producto();
+
+            oProducto.id = 0;
+            oProducto.codigo = "";
+            oProducto.nombre = nombre;
+            oProducto.cantidad = cantidad;
+            oProducto.precio = precio;
+            oProducto.rutaImagen = "NoDisponible";
+
+            return oProducto;
         }
     }
 }

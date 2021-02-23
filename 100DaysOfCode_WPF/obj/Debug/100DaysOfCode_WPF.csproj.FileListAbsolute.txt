@@ -28,3 +28,19 @@ C:\Users\JARGS\Documents\Visual Studio 2015\Projects\100DaysOfCode\100DaysOfCode
 C:\Users\JARGS\Documents\Visual Studio 2015\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.csproj.GenerateResource.Cache
 C:\Users\JARGS\Documents\Visual Studio 2015\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\Mensaje.g.cs
 C:\Users\JARGS\Documents\Visual Studio 2015\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\Mensaje.baml
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\bin\Debug\100DaysOfCode_WPF.exe.config
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.exe
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.pdb
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\bin\Debug\100DaysOfCode_WPF.exe
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\bin\Debug\100DaysOfCode_WPF.pdb
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.csprojResolveAssemblyReference.cache
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\frmProductos.g.cs
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\Mensaje.g.cs
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\App.g.cs
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF_MarkupCompile.cache
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF_MarkupCompile.lref
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\frmProductos.baml
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\Mensaje.baml
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.g.resources
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\_100DaysOfCode_WPF.Properties.Resources.resources
+E:\Projects\100DaysOfCode\100DaysOfCode_WPF\100DaysOfCode_WPF\obj\Debug\100DaysOfCode_WPF.csproj.GenerateResource.Cache
